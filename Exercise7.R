@@ -1,6 +1,7 @@
+#Question 2
 #Point-framing data and LAI data for a site in Alaska. 
 #Point-framing is just a measure of species richness from the number of times a pin dropped from the top of the canopy hits a certain spp.
-#LAI measurements are from an leaf area index meter.
+#LAI measurements are from a leaf area index meter.
 
 pfdata <- read.csv("/Users/elizabethfortin12/Documents/ND First Year/Meetings with Adrian/Fert Project/WorkingData/Point_Framing_Data_2016.csv", header = TRUE)
 laidata <- read.csv("/Users/elizabethfortin12/Documents/ND First Year/Meetings with Adrian/Fert Project/WorkingData/LAI.output.csv", header = FALSE)
@@ -45,3 +46,18 @@ b
 
 grid.arrange(a, b, ncol = 2)
 
+
+#Question 3
+data <- read.csv("/Users/elizabethfortin12/Documents/ND First Year/Biocomputing/R_Programming/Intro_Biocomp_ND_317_Tutorial7/data.txt")
+
+ddply(data, c("region"), summarize, mean=mean(observations))
+
+d <- ggplot(data = data)
+d + geom_bar(aes(x = as.factor(region), y = observations), stat = "summary",
+            fun.y = "mean", fill = "black", color = "black") + theme_classic() +
+            xlab("Region") + ylab("Mean Observation") + ggtitle("Mean Observations in Each Region")
+
+a <- ggplot(data = data)
+a + theme_classic() + geom_jitter(aes(x=as.factor(region),y=observations), alpha=0.1) + labs(x='Region', y='Observations') + ggtitle("Observations in Each Region")
+#Yes because the bar plot compares the averages of each region, 
+#while the geom_jitter plot gives you an idea of the average and the spread because it shows each individual data point
